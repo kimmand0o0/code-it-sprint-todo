@@ -17,7 +17,7 @@ export default function RootLayout({
       <body className="size-full top-0 left-0 antialiased flex bg-gray-50">
         <Header />
         <div className="w-full flex justify-center">
-          <div className="body-wrapper">{children}</div>
+          <div className="body-wrapper pt-20">{children}</div>
         </div>
       </body>
     </html>
