@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -18,4 +20,21 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.container { padding: 0px; }
+
+@media (max-width: 599px) {
+    .container { background-color: lightblue; }
+    .body-wrapper { width: 95%;}
+}
+
+@media (min-width: 600px) and (max-width: 1199px) {
+    .container { background-color: lightgreen; }
+    .body-wrapper { width: 95%;}
+}
+
+@media (min-width: 1200px) {
+    .container { background-color: lightcoral; }
+    .body-wrapper { width: 80%;}
 }
