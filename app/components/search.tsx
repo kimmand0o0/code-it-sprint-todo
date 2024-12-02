@@ -10,13 +10,14 @@ import axios from "axios";
 import { ITodo } from "@/app/page";
 
 interface SearchProps {
-  todos : ITodo[] | undefined
+  initialTodos : ITodo[] | undefined
   setTodos : Dispatch<SetStateAction<ITodo[] | undefined>>
 }
 
-const Search : FC<SearchProps> = ({todos, setTodos}) => {
+const Search : FC<SearchProps> = ({initialTodos, setTodos}) => {
     const [isActive, setIsActive] = useState<boolean>(false)
     const [text, setText] = useState<string>('')
+    const todos = initialTodos || []
 
     useEffect(() => {
         if(text.length > 0) setIsActive(true)

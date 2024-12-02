@@ -74,7 +74,7 @@ export default function Home() {
 
   return (
     <main className="w-full flex flex-col justify-center">
-      <Search todos={todos} setTodos={setTodos} />
+      <Search initialTodos={todos} setTodos={setTodos} />
       <div className={`flex ${width > 1200 ? 'flex-row' : 'flex-col'}`}>
         <ul className={`w-full ${width > 1200 ? 'mr-1' : ''}`}>
           <Image src={TodoLabel} alt="todo-label" className="mt-10"/>
