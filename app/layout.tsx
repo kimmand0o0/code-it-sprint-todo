@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/app/globals.css";
+import Header from "@/app/components/header";
 
 export const metadata: Metadata = {
   title: "Do it",
@@ -12,8 +13,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`antialiased`}>{children}</body>
+    <html lang="en" className="size-full flex justify-center">
+      <body className="size-full top-0 left-0 antialiased flex bg-gray-50">
+        <Header />
+        <div className="w-full flex justify-center">
+          <div className="body-wrapper">{children}</div>
+        </div>
+      </body>
     </html>
   );
 }
