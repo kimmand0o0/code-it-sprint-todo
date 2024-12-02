@@ -1,13 +1,20 @@
 'use client'
 
-import { FC, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 
 import PlusWhite from '@/app/assets/icons/plus-white.svg'
 import PlusSlate from '@/app/assets/icons/plus-slate.svg'
 
 import Button from "@/app/components/button";
+import axios from "axios";
+import { ITodo } from "@/app/page";
 
-const Search : FC = () => {
+interface SearchProps {
+  todos : ITodo[] | undefined
+  setTodos : Dispatch<SetStateAction<ITodo[] | undefined>>
+}
+
+const Search : FC<SearchProps> = ({todos, setTodos}) => {
     const [isActive, setIsActive] = useState<boolean>(false)
     const [text, setText] = useState<string>('')
 
@@ -16,9 +23,20 @@ const Search : FC = () => {
         if(text.length === 0) setIsActive(false)
     }, [text])
 
-    const handleCreateTodo = () => {
-        //TODO : 로직 필요
-        console.log('Todo 추가 로직 필요')
+    const handleCreateTodo = async () => {
+        try {
+          const { data } = await axios.post('https://assignment-todolist-api.vercel.app/api/kimmandoo/items', {
+            name : text
+          })
+
+          setTodos([...todos, data])
+          setText('')
+        } catch (error) {
+          alert('업로드에 실패하였습니다! 다시 시도해주세요!')
+        }
+        
+
+        
     }
 
   return (

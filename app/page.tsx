@@ -18,7 +18,7 @@ import DoneLabel from '@/app/assets/images/done-label.svg'
 import DoneLarge from '@/app/assets/images/done-large.svg'
 import DoneSmall from '@/app/assets/images/done-small.svg'
 
-interface ITodo {
+export interface ITodo {
   "id": number;
   "name": string;
   "isCompleted": boolean;
@@ -74,7 +74,7 @@ export default function Home() {
 
   return (
     <main className="w-full flex flex-col justify-center">
-      <Search />
+      <Search todos={todos} setTodos={setTodos} />
       <div className={`flex ${width > 1200 ? 'flex-row' : 'flex-col'}`}>
         <ul className={`w-full ${width > 1200 ? 'mr-1' : ''}`}>
           <Image src={TodoLabel} alt="todo-label" className="mt-10"/>
