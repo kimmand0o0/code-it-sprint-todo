@@ -41,7 +41,6 @@ export default function Home() {
 
       const { data } = await axios.get('https://assignment-todolist-api.vercel.app/api/kimmandoo/items?page=1&pageSize=10')
       setTodos(data)
-      console.log(data)
     } catch (err) {
       console.log(err)
       setError(true)
@@ -49,6 +48,32 @@ export default function Home() {
 
     setLoading(false)
   }
+
+  const handleUpdateComplete = async (id : number) => {
+        try {
+            setLoading(true)
+
+            const {data} = await axios.get(`https://assignment-todolist-api.vercel.app/api/kimmandoo/items/${id}`)
+            await axios.patch(`https://assignment-todolist-api.vercel.app/api/kimmandoo/items/${id}`, {
+                name : data.name,
+                memo : data.memo || '',
+                imageUrl : data.imageUrl || '',
+                isCompleted : true
+            })
+
+            setTodos(todos?.map((_todo) => {
+              if(_todo.id === id) return {
+                ..._todo, isCompleted : true
+              }
+
+              return _todo
+            }))
+        } catch (error) {
+            alert('업데이트에 실패하였습니다. 잠시 후 다시 시도해주세요!')
+        }
+
+        setLoading(false)
+    }
 
   useEffect(() => {
     fetchTodos()
@@ -78,7 +103,7 @@ export default function Home() {
       <div className={`flex ${width > 1200 ? 'flex-row' : 'flex-col'}`}>
         <ul className={`w-full ${width > 1200 ? 'mr-1' : ''}`}>
           <Image src={TodoLabel} alt="todo-label" className="mt-10"/>
-          {todoList?.map((_todo) => <CheckList key={_todo.id} id={_todo.id} name={_todo.name} isCompleted={_todo.isCompleted} /> )}
+          {todoList?.map((_todo) => <CheckList key={_todo.id} id={_todo.id} name={_todo.name} initialIsCompleted={_todo.isCompleted} handleUpdateComplete={handleUpdateComplete} />  )}
           {todoList?.length === 0 && 
           <div className="size-full flex justify-center items-center">
             <Image src={width < 600 ? TodoSmall : TodoLarge} alt="todo-list-none"/>
@@ -87,7 +112,7 @@ export default function Home() {
         </ul>
         <ul className={`w-full ${width > 1200 ? 'ml-1' : ''}`}>
           <Image src={DoneLabel} alt="done-label" className="mt-10"/>
-          {doneList?.map((_todo) => <CheckList key={_todo.id} id={_todo.id} name={_todo.name} isCompleted={_todo.isCompleted} /> )}
+          {doneList?.map((_todo) => <CheckList key={_todo.id} id={_todo.id} name={_todo.name} initialIsCompleted={_todo.isCompleted} handleUpdateComplete={handleUpdateComplete} /> )}
           {doneList?.length === 0 && 
           <div className="size-full flex justify-center items-center">
             <Image src={width < 600 ? DoneSmall : DoneLarge} alt="done-list-none"/>
