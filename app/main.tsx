@@ -50,6 +50,7 @@ export default function Home() {
 
       const data = await getTodos(page, size);
 
+      setPage((prev) => prev + 1);
       setTodos((prev) => [...prev, ...data]);
     } catch (err) {
       console.log(err);
@@ -86,20 +87,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setPage((prev) => prev + 1);
-  }, [inView]);
-
-  useEffect(() => {
     fetchTodos();
-  }, [page, size]);
-
-  useEffect(() => {
-    if (width > 1199) {
-      return setSize(20);
-    }
-
-    setSize(10);
-  }, [width]);
+  }, [inView]);
 
   const todoList = todos?.filter((_todo) => !_todo.isCompleted);
   const doneList = todos?.filter((_todo) => _todo.isCompleted);
@@ -128,7 +117,9 @@ export default function Home() {
     !!todos?.length && (
       <main className="w-full flex flex-col justify-center">
         <Search initialTodos={todos} setTodos={setTodos} />
-        <div className={`flex ${width > 1200 ? "flex-row" : "flex-col"} pb-10`}>
+        <div
+          className={`size-full flex ${width > 1200 ? "flex-row" : "flex-col"} pb-50`}
+        >
           <ul className={`w-full ${width > 1200 ? "mr-1" : ""}`}>
             <Image src={TodoLabel} alt="todo-label" className="mt-10" />
             {!!todoList?.length &&
