@@ -49,9 +49,6 @@ export default function Home() {
 
       const data = await getTodos(page);
 
-      console.log(data);
-      console.log(page);
-
       setPage((prev) => prev + 1);
       setTodos((prev) => [...prev, ...data]);
     } catch (err) {
