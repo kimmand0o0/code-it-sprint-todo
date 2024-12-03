@@ -25,7 +25,7 @@ import ImageUpdate from "@/app/assets/icons/edit.svg";
 import PlusEdit from "@/app/assets/icons/plus-edit.svg";
 
 interface DetailProps {
-  params: { itemId: number };
+  params: any;
 }
 
 const Detail: FC<DetailProps> = ({ params: { itemId } }) => {
