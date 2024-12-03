@@ -47,11 +47,14 @@ const Detail: FC = () => {
 
   const handleUpdateComplete = async () => {
     try {
-      await updateComplete(todo as ITodo);
+      await updateComplete({
+        ...todo,
+        isCompleted: !todo?.isCompleted,
+      } as ITodo);
 
       setTodo({
         ...(todo as ITodo),
-        isCompleted: true,
+        isCompleted: !todo?.isCompleted,
       });
     } catch (error) {
       alert("업데이트에 실패하였습니다. 잠시 후 다시 시도해주세요!");

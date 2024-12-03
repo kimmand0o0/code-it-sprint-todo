@@ -28,7 +28,6 @@ const CheckListDetail: FC<CheckListDetailProps> = ({
       className={`${isCompleted ? "bg-violet-100" : "bg-white"} h-16 p-2 mt-3 rounded-3xl border-2 border-slate-900 flex justify-center items-center font-bold text-[16px] text-slate-900 underline`}
     >
       <button
-        disabled={isCompleted}
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();

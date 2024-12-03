@@ -11,7 +11,7 @@ interface CheckListProps {
   id: number;
   name: string;
   initialIsCompleted: boolean;
-  handleUpdateComplete: (id: number) => Promise<void>;
+  handleUpdateComplete: (id: number, isCompleted: boolean) => Promise<void>;
 }
 
 const CheckList: FC<CheckListProps> = ({
@@ -28,13 +28,12 @@ const CheckList: FC<CheckListProps> = ({
       className={`${isCompleted ? "bg-violet-100 line-through" : "bg-white"} h-[50px] p-2 mt-3 rounded-[27px] border-2 border-slate-900 flex justify-start items-center text-[16px] text-slate-800`}
     >
       <button
-        disabled={isCompleted}
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
 
-          handleUpdateComplete(id);
-          setIsCompleted(true);
+          handleUpdateComplete(id, isCompleted);
+          setIsCompleted(!isCompleted);
         }}
         className="mr-2"
       >

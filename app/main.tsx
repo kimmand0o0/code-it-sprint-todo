@@ -51,13 +51,13 @@ export default function Home() {
     setLoading(false);
   };
 
-  const handleUpdateComplete = async (id: number) => {
+  const handleUpdateComplete = async (id: number, isCompleted: boolean) => {
     try {
       setLoading(true);
 
       const data = await getTodoById(id);
 
-      await updateComplete(data);
+      await updateComplete({ ...data, isCompleted });
 
       setTodos(
         todos?.map((_todo) => {

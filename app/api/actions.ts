@@ -24,7 +24,7 @@ export const updateComplete = async (data: ITodo) => {
       name: data.name,
       memo: data.memo || "",
       imageUrl: data.imageUrl || "",
-      isCompleted: true,
+      isCompleted: data.isCompleted,
     },
   );
 };
