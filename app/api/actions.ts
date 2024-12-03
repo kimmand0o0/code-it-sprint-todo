@@ -1,9 +1,9 @@
 import axios from "axios";
 import { ITodo } from "@/app/page";
 
-export const getTodos = async () => {
+export const getTodos = async (page = 1, size = 10) => {
   const { data } = await axios.get(
-    "https://assignment-todolist-api.vercel.app/api/kimmandoo/items?page=1&pageSize=10",
+    `https://assignment-todolist-api.vercel.app/api/kimmandoo/items?page=${page}&pageSize=${size}`,
   );
 
   return data;

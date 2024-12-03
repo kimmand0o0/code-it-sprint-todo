@@ -17,8 +17,8 @@ import { ITodo } from "@/app/page";
 import { addTodo } from "@/app/api/actions";
 
 interface SearchProps {
-  initialTodos: ITodo[] | undefined;
-  setTodos: Dispatch<SetStateAction<ITodo[] | undefined>>;
+  initialTodos: ITodo[];
+  setTodos: Dispatch<SetStateAction<ITodo[]>>;
 }
 
 const Search: FC<SearchProps> = ({ initialTodos, setTodos }) => {

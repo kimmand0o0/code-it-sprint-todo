@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import ClipLoader from "react-spinners/ClipLoader";
+import { useInView } from "react-intersection-observer";
 
 import Search from "@/app/components/search";
 import CheckList from "@/app/components/check-list";
@@ -29,10 +30,17 @@ export interface ITodo {
 }
 
 export default function Home() {
-  const [todos, setTodos] = useState<ITodo[]>();
+  const { ref, inView } = useInView({
+    /* Optional options */
+    threshold: 1,
+  });
+
+  const [todos, setTodos] = useState<ITodo[]>([]);
 
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [size, setSize] = useState<number>(10);
 
   const width = useWindowWidth() || 1200;
 
@@ -40,9 +48,9 @@ export default function Home() {
     try {
       setLoading(true);
 
-      const data = await getTodos();
+      const data = await getTodos(page, size);
 
-      setTodos(data);
+      setTodos((prev) => [...prev, ...data]);
     } catch (err) {
       console.log(err);
       setError(true);
@@ -78,8 +86,20 @@ export default function Home() {
   };
 
   useEffect(() => {
+    setPage((prev) => prev + 1);
+  }, [inView]);
+
+  useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [page, size]);
+
+  useEffect(() => {
+    if (width > 1199) {
+      return setSize(20);
+    }
+
+    setSize(10);
+  }, [width]);
 
   const todoList = todos?.filter((_todo) => !_todo.isCompleted);
   const doneList = todos?.filter((_todo) => _todo.isCompleted);
@@ -108,7 +128,7 @@ export default function Home() {
     !!todos?.length && (
       <main className="w-full flex flex-col justify-center">
         <Search initialTodos={todos} setTodos={setTodos} />
-        <div className={`flex ${width > 1200 ? "flex-row" : "flex-col"}`}>
+        <div className={`flex ${width > 1200 ? "flex-row" : "flex-col"} pb-10`}>
           <ul className={`w-full ${width > 1200 ? "mr-1" : ""}`}>
             <Image src={TodoLabel} alt="todo-label" className="mt-10" />
             {!!todoList?.length &&
@@ -130,7 +150,7 @@ export default function Home() {
               </div>
             )}
           </ul>
-          <ul className={`w-full ${width > 1200 ? "ml-1" : ""}`}>
+          <ul className={`w-full ${width > 1200 ? "ml-1" : ""} pb-30`}>
             <Image src={DoneLabel} alt="done-label" className="mt-10" />
             {!!doneList?.length &&
               doneList?.map((_todo) => (
@@ -152,6 +172,8 @@ export default function Home() {
             )}
           </ul>
         </div>
+        {loading && <p>Loading...</p>}
+        <div ref={ref} id="observer" style={{ height: "10px" }} />
       </main>
     )
   );
