@@ -17,6 +17,9 @@ export default {
         DEFAULT: "4px 3px 0 #0F172A",
       },
     },
+    fontFamily: {
+      NanumSquare: "NanumSquare",
+    },
   },
   plugins: [],
 } satisfies Config;
