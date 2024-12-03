@@ -34,7 +34,7 @@ export default function Home() {
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const width = useWindowWidth();
+  const width = useWindowWidth() || 1200;
 
   const fetchTodos = async () => {
     try {

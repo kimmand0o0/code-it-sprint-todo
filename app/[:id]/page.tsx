@@ -34,7 +34,7 @@ const Detail: FC = () => {
   const [memo, setMemo] = useState<string>("");
   const [isActive, setIsActive] = useState<boolean>(false);
 
-  const width = useWindowWidth();
+  const width = useWindowWidth() || 1200;
 
   const fetchTodo = async () => {
     try {

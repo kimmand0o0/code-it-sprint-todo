@@ -12,7 +12,7 @@ import useWindowWidth from "@/app/utils/getWindowWidth";
 const Header: FC = () => {
   const router = useRouter();
 
-  const width = useWindowWidth();
+  const width = useWindowWidth() || 1200;
 
   return (
     <header className="fixed z-50 top-0 left-0 w-full h-[60px] bg-white border-slate-200 border-b-[1px] flex justify-center items-center">
