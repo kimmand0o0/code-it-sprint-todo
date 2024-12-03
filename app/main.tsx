@@ -49,8 +49,8 @@ export default function Home() {
 
       const data = await getTodos(page);
 
-      console.log(page);
       console.log(data);
+      console.log(page);
 
       setPage((prev) => prev + 1);
       setTodos((prev) => [...prev, ...data]);
@@ -120,7 +120,7 @@ export default function Home() {
       <main className="size-full flex flex-col justify-center">
         <Search initialTodos={todos} setTodos={setTodos} />
         <div
-          className={`size-full flex ${width > 1200 ? "flex-row" : "flex-col"} pb-50`}
+          className={`size-full flex ${width > 1200 ? "flex-row" : "flex-col"} pb-72`}
         >
           <ul className={`w-full ${width > 1200 ? "mr-1" : ""}`}>
             <Image src={TodoLabel} alt="todo-label" className="mt-10" />
@@ -165,12 +165,9 @@ export default function Home() {
             )}
           </ul>
         </div>
-        {loading && <p>Loading...</p>}
-        <div
-          ref={ref}
-          id="observer"
-          style={{ height: "10px", margin: "5px" }}
-        />
+        <div ref={ref} id="observer" className="h-10 w-full">
+          .
+        </div>
       </main>
     )
   );
