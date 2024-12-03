@@ -113,8 +113,19 @@ const Detail: FC<DetailProps> = ({ params: { itemId } }) => {
       setPreview(reader.result as string);
     };
 
+    const randomStr = (length = 8) => {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      let str = "";
+
+      for (let i = 0; i < length; i++) {
+        str += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+
+      return str;
+    };
+    const formattedName = file.name.replace(/^[a-z|A-Z]+$/, "") + randomStr();
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("image", { name: formattedName, ...file });
 
     const imageUrl = await updateImage(formData);
 
