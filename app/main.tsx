@@ -40,7 +40,6 @@ export default function Home() {
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
-  const [size, setSize] = useState<number>(10);
 
   const width = useWindowWidth() || 1200;
 
@@ -48,7 +47,10 @@ export default function Home() {
     try {
       setLoading(true);
 
-      const data = await getTodos(page, size);
+      const data = await getTodos(page);
+
+      console.log(page);
+      console.log(data);
 
       setPage((prev) => prev + 1);
       setTodos((prev) => [...prev, ...data]);
@@ -115,7 +117,7 @@ export default function Home() {
 
   return (
     !!todos?.length && (
-      <main className="w-full flex flex-col justify-center">
+      <main className="size-full flex flex-col justify-center">
         <Search initialTodos={todos} setTodos={setTodos} />
         <div
           className={`size-full flex ${width > 1200 ? "flex-row" : "flex-col"} pb-50`}
@@ -164,7 +166,11 @@ export default function Home() {
           </ul>
         </div>
         {loading && <p>Loading...</p>}
-        <div ref={ref} id="observer" style={{ height: "10px" }} />
+        <div
+          ref={ref}
+          id="observer"
+          style={{ height: "10px", margin: "5px" }}
+        />
       </main>
     )
   );

@@ -16,8 +16,8 @@ export default function RootLayout({
     <html lang="en" className="size-full flex justify-center">
       <body className="size-full top-0 left-0 antialiased flex bg-gray-50 font-NanumSquare">
         <Header />
-        <div className="w-full flex justify-center">
-          <div className="body-wrapper pt-20">{children}</div>
+        <div className="size-full flex justify-center">
+          <div className="body-wrapper h-full pt-20">{children}</div>
         </div>
       </body>
     </html>
