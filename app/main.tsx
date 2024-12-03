@@ -64,7 +64,7 @@ export default function Home() {
           if (_todo.id === id)
             return {
               ..._todo,
-              isCompleted: true,
+              isCompleted,
             };
 
           return _todo;

@@ -32,7 +32,7 @@ const CheckList: FC<CheckListProps> = ({
           event.preventDefault();
           event.stopPropagation();
 
-          handleUpdateComplete(id, isCompleted);
+          handleUpdateComplete(id, !isCompleted);
           setIsCompleted(!isCompleted);
         }}
         className="mr-2"
