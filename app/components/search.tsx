@@ -6,8 +6,8 @@ import PlusWhite from '@/app/assets/icons/plus-white.svg'
 import PlusSlate from '@/app/assets/icons/plus-slate.svg'
 
 import Button from "@/app/components/button";
-import axios from "axios";
 import { ITodo } from "@/app/page";
+import { addTodo } from "@/app/api/actions";
 
 interface SearchProps {
   initialTodos : ITodo[] | undefined
@@ -32,9 +32,7 @@ const Search : FC<SearchProps> = ({initialTodos, setTodos}) => {
 
     const handleCreateTodo = async () => {
         try {
-          const { data } = await axios.post('https://assignment-todolist-api.vercel.app/api/kimmandoo/items', {
-            name : text
-          })
+          const { data } = await addTodo(text)
 
           setTodos([...todos, data])
           setText('')
