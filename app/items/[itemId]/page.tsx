@@ -30,6 +30,7 @@ interface DetailProps {
 
 const Detail: FC<DetailProps> = ({ params: { itemId } }) => {
   const router = useRouter();
+  const id = itemId;
 
   const [preview, setPreview] = useState("");
 
@@ -42,7 +43,7 @@ const Detail: FC<DetailProps> = ({ params: { itemId } }) => {
 
   const fetchTodo = async () => {
     try {
-      const data = await getTodoById(itemId);
+      const data = await getTodoById(id);
 
       setTodo(data);
       setMemo(data.memo);
