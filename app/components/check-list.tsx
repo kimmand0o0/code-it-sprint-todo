@@ -24,7 +24,7 @@ const CheckList: FC<CheckListProps> = ({
 
   return (
     <Link
-      href={`/${id}`}
+      href={`/items/${id}`}
       className={`${isCompleted ? "bg-violet-100 line-through" : "bg-white"} h-[50px] p-2 mt-3 rounded-[27px] border-2 border-slate-900 flex justify-start items-center text-[16px] text-slate-800`}
     >
       <button

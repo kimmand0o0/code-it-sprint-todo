@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, InputHTMLAttributes, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 
