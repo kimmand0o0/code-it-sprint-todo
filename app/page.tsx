@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+import Main from "@/app/main";
 
 export interface ITodo {
   id: number;
@@ -9,14 +9,10 @@ export interface ITodo {
   tenantId?: string;
 }
 
-const DynamicComponentWithNoSSR = dynamic(() => import("./main"), {
-  ssr: false,
-});
-
 export default function Home() {
   return (
     <div>
-      <DynamicComponentWithNoSSR />;
+      <Main />;
     </div>
   );
 }
