@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import CheckListDetail from "@/app/components/check-list-detail";
@@ -13,7 +13,7 @@ import {
   updateComplete,
   updateImage,
   updateImgUrl,
-  updateMemo,
+  updateTodo,
 } from "@/app/api/actions";
 import useWindowWidth from "@/app/utils/getWindowWidth";
 
@@ -24,13 +24,17 @@ import XIcon from "@/app/assets/icons/X.svg";
 import ImageUpdate from "@/app/assets/icons/edit.svg";
 import PlusEdit from "@/app/assets/icons/plus-edit.svg";
 
-const Detail: FC = () => {
+interface DetailProps {
+  params: { itemId: number };
+}
+
+const Detail: FC<DetailProps> = ({ params: { itemId } }) => {
   const router = useRouter();
-  const path = usePathname();
 
   const [preview, setPreview] = useState("");
 
   const [todo, setTodo] = useState<ITodo>();
+  const [name, setName] = useState<string>("");
   const [memo, setMemo] = useState<string>("");
   const [isActive, setIsActive] = useState<boolean>(false);
 
@@ -38,9 +42,11 @@ const Detail: FC = () => {
 
   const fetchTodo = async () => {
     try {
-      const data = await getTodoById(Number(path.slice(1)));
+      const data = await getTodoById(itemId);
+
       setTodo(data);
       setMemo(data.memo);
+      setName(data.name);
       setPreview(data.imageUrl);
     } catch (error) {}
   };
@@ -63,13 +69,15 @@ const Detail: FC = () => {
 
   const handleUpdate = async () => {
     try {
-      await updateMemo({
+      await updateTodo({
         ...todo,
+        name,
         memo,
       } as ITodo);
 
       setTodo({
         ...todo,
+        name,
         memo,
       } as ITodo);
 
@@ -127,6 +135,8 @@ const Detail: FC = () => {
     <div>
       <CheckListDetail
         todo={todo}
+        name={name}
+        setName={setName}
         handleUpdateComplete={handleUpdateComplete}
       />
       <div className={`flex ${width < 1199 ? "flex-col" : "flex-row"}`}>

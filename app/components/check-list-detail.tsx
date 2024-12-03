@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 
 import { ITodo } from "@/app/page";
@@ -10,14 +10,20 @@ import CheckboxFrame from "@/app/assets/icons/checkbox-frame.svg";
 
 interface CheckListDetailProps {
   todo: ITodo | undefined;
+  name: string;
+  setName: Dispatch<SetStateAction<string>>;
   handleUpdateComplete: () => Promise<void>;
 }
 
 const CheckListDetail: FC<CheckListDetailProps> = ({
   todo,
+  name,
+  setName,
   handleUpdateComplete,
 }) => {
   const [isCompleted, setIsCompleted] = useState<boolean>();
+
+  console.log(name);
 
   useEffect(() => {
     setIsCompleted(todo?.isCompleted as boolean);
@@ -42,7 +48,11 @@ const CheckListDetail: FC<CheckListDetailProps> = ({
           alt="checkbox"
         />
       </button>
-      {todo?.name}
+      <input
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+        className="z-40 bg-transparent outline-none"
+      />
     </div>
   );
 };

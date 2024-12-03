@@ -40,7 +40,7 @@ export const addTodo = async (name: string) => {
   return data;
 };
 
-export const updateMemo = async (data: ITodo) => {
+export const updateTodo = async (data: ITodo) => {
   await axios.patch(
     `https://assignment-todolist-api.vercel.app/api/kimmandoo/items/${data.id}`,
     {
