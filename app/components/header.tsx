@@ -22,7 +22,7 @@ const Header: FC = () => {
             router.push("/");
           }}
         >
-          <Image src={width ? LogoSmall : LogoLarge} alt="logo-large" />
+          <Image src={width < 600 ? LogoSmall : LogoLarge} alt="logo-large" />
         </button>
       </div>
     </header>
