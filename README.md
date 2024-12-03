@@ -1,4 +1,4 @@
-# Do it!
+# [Do it!](https://code-it-sprint-todo-40kab2cx2-kimmand0o0s-projects.vercel.app/)
 
 ![Dec-03-2024 16-26-54](https://github.com/user-attachments/assets/7f9f18f8-6fe4-4c90-8862-911be6eee020)
 
@@ -16,6 +16,7 @@
 - [깃모지](https://gitmoji.dev/)를 이용해 커밋의 가독성을 높였습니다.
 - 이미지 저장 시 중복을 막기 위하여 랜덤 문자열을 생성하여 같이 업로드 합니다.
 - 데이터가 빠르게 들어오지 않을 시 로딩 화면을 띄워 유저 경험을 향상 시켰습니다.
+- eslint와 prettier를 이용하여 코드 품질과 가독성 유지해 일관성 있게 작업 하였습니다.
 
 ---
 
