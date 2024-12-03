@@ -28,7 +28,7 @@ export interface ITodo {
   tenantId?: string;
 }
 
-export default function Main() {
+export default function Home() {
   const [todos, setTodos] = useState<ITodo[]>();
 
   const [error, setError] = useState<boolean>(false);
@@ -105,52 +105,54 @@ export default function Main() {
     );
 
   return (
-    <main className="w-full flex flex-col justify-center">
-      <Search initialTodos={todos} setTodos={setTodos} />
-      <div className={`flex ${width > 1200 ? "flex-row" : "flex-col"}`}>
-        <ul className={`w-full ${width > 1200 ? "mr-1" : ""}`}>
-          <Image src={TodoLabel} alt="todo-label" className="mt-10" />
-          {!!todoList?.length &&
-            todoList?.map((_todo) => (
-              <CheckList
-                key={_todo.id}
-                id={_todo.id}
-                name={_todo.name}
-                initialIsCompleted={_todo.isCompleted}
-                handleUpdateComplete={handleUpdateComplete}
-              />
-            ))}
-          {!todoList?.length && (
-            <div className="size-full flex justify-center items-center">
-              <Image
-                src={width < 600 ? TodoSmall : TodoLarge}
-                alt="todo-list-none"
-              />
-            </div>
-          )}
-        </ul>
-        <ul className={`w-full ${width > 1200 ? "ml-1" : ""}`}>
-          <Image src={DoneLabel} alt="done-label" className="mt-10" />
-          {!!doneList?.length &&
-            doneList?.map((_todo) => (
-              <CheckList
-                key={_todo.id}
-                id={_todo.id}
-                name={_todo.name}
-                initialIsCompleted={_todo.isCompleted}
-                handleUpdateComplete={handleUpdateComplete}
-              />
-            ))}
-          {!doneList?.length && (
-            <div className="size-full flex justify-center items-center">
-              <Image
-                src={width < 600 ? DoneSmall : DoneLarge}
-                alt="done-list-none"
-              />
-            </div>
-          )}
-        </ul>
-      </div>
-    </main>
+    !!todos?.length && (
+      <main className="w-full flex flex-col justify-center">
+        <Search initialTodos={todos} setTodos={setTodos} />
+        <div className={`flex ${width > 1200 ? "flex-row" : "flex-col"}`}>
+          <ul className={`w-full ${width > 1200 ? "mr-1" : ""}`}>
+            <Image src={TodoLabel} alt="todo-label" className="mt-10" />
+            {!!todoList?.length &&
+              todoList?.map((_todo) => (
+                <CheckList
+                  key={_todo.id}
+                  id={_todo.id}
+                  name={_todo.name}
+                  initialIsCompleted={_todo.isCompleted}
+                  handleUpdateComplete={handleUpdateComplete}
+                />
+              ))}
+            {!todoList?.length && (
+              <div className="size-full flex justify-center items-center">
+                <Image
+                  src={width < 600 ? TodoSmall : TodoLarge}
+                  alt="todo-list-none"
+                />
+              </div>
+            )}
+          </ul>
+          <ul className={`w-full ${width > 1200 ? "ml-1" : ""}`}>
+            <Image src={DoneLabel} alt="done-label" className="mt-10" />
+            {!!doneList?.length &&
+              doneList?.map((_todo) => (
+                <CheckList
+                  key={_todo.id}
+                  id={_todo.id}
+                  name={_todo.name}
+                  initialIsCompleted={_todo.isCompleted}
+                  handleUpdateComplete={handleUpdateComplete}
+                />
+              ))}
+            {!doneList?.length && (
+              <div className="size-full flex justify-center items-center">
+                <Image
+                  src={width < 600 ? DoneSmall : DoneLarge}
+                  alt="done-list-none"
+                />
+              </div>
+            )}
+          </ul>
+        </div>
+      </main>
+    )
   );
 }
