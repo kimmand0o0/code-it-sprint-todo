@@ -20,18 +20,20 @@ const Button: FC<ButtonProps> = ({
   style,
   icon,
 }) => {
+  const width = useWindowWidth() || 1200;
+
   return (
     <button
       onClick={onClick}
-      className={`${style} ${useWindowWidth() > 600 || !type ? "px-14" : "px-5"} ${!type && "mx-2 py-2.5"} rounded-3xl border-2 border-slate-900 drop-shadow font-bold text-[18px]`}
+      className={`${style} ${width > 600 || !type ? "px-14" : "px-5"} ${!type && "mx-2 py-2.5"} rounded-3xl border-2 border-slate-900 drop-shadow font-bold text-[18px]`}
     >
       <div className="w-full min-w-4 whitespace-nowrap flex flex-row justify-center items-center">
         <Image
           src={icon}
           alt="button-icon"
-          className={useWindowWidth() > 600 || !type ? "mr-2" : ""}
+          className={width > 600 || !type ? "mr-2" : ""}
         />
-        {(useWindowWidth() > 600 || !type) && <span>{children}</span>}
+        {(width > 600 || !type) && <span>{children}</span>}
       </div>
     </button>
   );
