@@ -24,12 +24,15 @@ body {
 
 @media (max-width: 599px) {
     .body-wrapper { width: 95%;}
+    .button-justify { justify-content: space-around;}
 }
 
 @media (min-width: 600px) and (max-width: 1199px) {
     .body-wrapper { width: 95%;}
+    .button-justify { justify-content: center;}
 }
 
 @media (min-width: 1200px) {
     .body-wrapper { width: 80%;}
+    .button-justify { justify-content: end;}
 }
