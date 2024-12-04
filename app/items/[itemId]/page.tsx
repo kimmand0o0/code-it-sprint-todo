@@ -144,6 +144,8 @@ const Detail: FC<DetailProps> = ({ params: { itemId } }) => {
 
     const imageUrl = await updateImage(formData);
 
+    console.log(renamedFile);
+
     await updateImgUrl({ ...todo, imageUrl } as ITodo);
   };
 
