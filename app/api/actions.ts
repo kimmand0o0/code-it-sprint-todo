@@ -83,7 +83,7 @@ export const updateImgUrl = async (todo: ITodo) => {
     `https://assignment-todolist-api.vercel.app/api/kimmandoo/items/${todo.id}`,
     {
       name: todo.name,
-      memo: todo.memo,
+      memo: todo.memo || "",
       imageUrl: todo.imageUrl,
       isCompleted: todo.isCompleted,
     },
