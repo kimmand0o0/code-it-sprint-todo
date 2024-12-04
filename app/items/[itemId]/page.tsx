@@ -24,10 +24,11 @@ import XIcon from "@/app/assets/icons/X.svg";
 import ImageUpdate from "@/app/assets/icons/edit.svg";
 import PlusEdit from "@/app/assets/icons/plus-edit.svg";
 
-const Detail: FC = () => {
-  const params = useParams<{ tag: string; item: string }>();
-  const itemId = params.itemId;
+interface DetailProps {
+  params: any;
+}
 
+const Detail: FC<DetailProps> = ({ params: { itemId } }) => {
   const router = useRouter();
   const id = itemId;
 
