@@ -59,7 +59,6 @@ export const deleteTodo = async (id: number) => {
 };
 
 export const updateImage = async (formData: FormData) => {
-  console.log("updateImage");
   const {
     data: { url },
   } = await axios.post(
@@ -74,18 +73,4 @@ export const updateImage = async (formData: FormData) => {
   );
 
   return url;
-};
-
-export const updateImgUrl = async (todo: ITodo) => {
-  console.log("updateImgUrl");
-  console.log(todo);
-  await axios.patch(
-    `https://assignment-todolist-api.vercel.app/api/kimmandoo/items/${todo.id}`,
-    {
-      name: todo.name,
-      memo: todo.memo || "",
-      imageUrl: todo.imageUrl,
-      isCompleted: todo.isCompleted,
-    },
-  );
 };

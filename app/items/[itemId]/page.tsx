@@ -12,7 +12,6 @@ import {
   getTodoById,
   updateComplete,
   updateImage,
-  updateImgUrl,
   updateTodo,
 } from "@/app/api/actions";
 import useWindowWidth from "@/app/utils/getWindowWidth";
@@ -144,9 +143,7 @@ const Detail: FC<DetailProps> = ({ params: { itemId } }) => {
 
     const imageUrl = await updateImage(formData);
 
-    console.log(renamedFile);
-
-    await updateImgUrl({ ...todo, imageUrl } as ITodo);
+    await updateTodo({ ...todo, imageUrl } as ITodo);
   };
 
   useEffect(() => {
