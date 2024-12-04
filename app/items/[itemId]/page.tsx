@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 
 import CheckListDetail from "@/app/components/check-list-detail";
@@ -24,11 +24,10 @@ import XIcon from "@/app/assets/icons/X.svg";
 import ImageUpdate from "@/app/assets/icons/edit.svg";
 import PlusEdit from "@/app/assets/icons/plus-edit.svg";
 
-interface DetailProps {
-  params: any;
-}
+const Detail: FC = () => {
+  const params = useParams<{ tag: string; item: string }>();
+  const itemId = params.itemId;
 
-const Detail: FC<DetailProps> = ({ params: { itemId } }) => {
   const router = useRouter();
   const id = itemId;
 
@@ -49,7 +48,9 @@ const Detail: FC<DetailProps> = ({ params: { itemId } }) => {
       setMemo(data.memo);
       setName(data.name);
       setPreview(data.imageUrl);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleUpdateComplete = async () => {
@@ -124,9 +125,21 @@ const Detail: FC<DetailProps> = ({ params: { itemId } }) => {
 
       return str;
     };
-    const formattedName = file.name.replace(/^[a-z|A-Z]+$/, "") + randomStr();
+
+    const regex = /[^a-zA-Z]/g;
+    const splitFileName = file.name.split(".");
+    const formattedName =
+      splitFileName[0].replace(regex, "") +
+      randomStr() +
+      "." +
+      splitFileName[1];
+
+    const renamedFile = new File([file], formattedName, {
+      type: file.type,
+    });
+
     const formData = new FormData();
-    formData.append("image", { name: formattedName, ...file });
+    formData.append("image", renamedFile);
 
     const imageUrl = await updateImage(formData);
 

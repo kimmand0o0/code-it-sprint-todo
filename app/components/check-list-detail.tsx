@@ -23,8 +23,6 @@ const CheckListDetail: FC<CheckListDetailProps> = ({
 }) => {
   const [isCompleted, setIsCompleted] = useState<boolean>();
 
-  console.log(name);
-
   useEffect(() => {
     setIsCompleted(todo?.isCompleted as boolean);
   }, [todo]);
